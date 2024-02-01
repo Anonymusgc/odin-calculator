@@ -1,5 +1,5 @@
-let firstNum = 0;
-let secNum = 0;
+let firstNum = "";
+let secNum = "";
 let operator = "";
 
 const add = function (a, b) {};
@@ -21,3 +21,15 @@ const operate = function (a, b, operator) {
     divide(a, b);
   }
 };
+
+const display = function (a, b, operator) {
+  const displayText = document.querySelector(".display-text");
+  displayText.textContent = `${a} ${operator} ${b}`;
+};
+
+const numBtns = document.querySelectorAll(".num-btn");
+numBtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    firstNum = event.target.textContent;
+  });
+});
