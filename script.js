@@ -31,7 +31,7 @@ const operate = function (a, b) {
   } else if (operator == "/") {
     firstNum = divide(a, b);
   }
-  result = true;
+
   operator = "";
   secNum = "";
   display(firstNum, secNum, operator);
@@ -75,4 +75,5 @@ numBtns.forEach((btn) => {
 const equalBtn = document.querySelector(".equal-btn");
 equalBtn.addEventListener("click", () => {
   operate(firstNum, secNum);
+  result = true;
 });
