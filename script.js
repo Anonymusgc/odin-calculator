@@ -2,29 +2,43 @@ let firstNum = "";
 let secNum = "";
 let operator = "";
 
-const add = function (a, b) {};
+const add = function (a, b) {
+  return a + b;
+};
 
-const subtract = function (a, b) {};
+const subtract = function (a, b) {
+  return a - b;
+};
 
-const multiply = function (a, b) {};
+const multiply = function (a, b) {
+  return a * b;
+};
 
-const divide = function (a, b) {};
+const divide = function (a, b) {
+  return a / b;
+};
 
 const operate = function (a, b, operator) {
   if (operator == "+") {
-    add(a, b);
+    firstNum = add(a, b);
   } else if (operator == "-") {
-    subtract(a, b);
+    firstNum = subtract(a, b);
   } else if (operator == "*") {
-    multiply(a, b);
+    firstNum = multiply(a, b);
   } else if (operator == "/") {
-    divide(a, b);
+    firstNum = divide(a, b);
   }
+  operator = "";
 };
 
 const display = function (a, b, operator) {
   const displayText = document.querySelector(".display-text");
-  displayText.textContent = a;
+
+  if (operator != "") {
+    displayText.textContent = b;
+  } else {
+    displayText.textContent = a;
+  }
 };
 
 const signBtns = document.querySelectorAll(".sign-btn");
@@ -38,9 +52,9 @@ const numBtns = document.querySelectorAll(".num-btn");
 numBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     if (operator != "") {
-      secNum = event.target.textContent;
+      secNum += event.target.textContent;
     } else {
-      firstNum = event.target.textContent;
+      firstNum += event.target.textContent;
     }
 
     display(firstNum, secNum, operator);
