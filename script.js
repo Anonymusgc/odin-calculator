@@ -1,24 +1,27 @@
 let firstNum = "";
 let secNum = "";
 let operator = "";
+let result = false;
 
 const add = function (a, b) {
-  return a + b;
+  return "" + (a + b);
 };
 
 const subtract = function (a, b) {
-  return a - b;
+  return "" + (a - b);
 };
 
 const multiply = function (a, b) {
-  return a * b;
+  return "" + a * b;
 };
 
 const divide = function (a, b) {
-  return a / b;
+  return "" + a / b;
 };
 
-const operate = function (a, b, operator) {
+const operate = function (a, b) {
+  a = Number(a);
+  b = Number(b);
   if (operator == "+") {
     firstNum = add(a, b);
   } else if (operator == "-") {
@@ -28,12 +31,15 @@ const operate = function (a, b, operator) {
   } else if (operator == "/") {
     firstNum = divide(a, b);
   }
+  result = true;
   operator = "";
+  secNum = "";
+  display(firstNum, secNum, operator);
 };
 
 const display = function (a, b, operator) {
   const displayText = document.querySelector(".display-text");
-
+  // console.log(operator);
   if (operator != "") {
     displayText.textContent = b;
   } else {
@@ -45,18 +51,28 @@ const signBtns = document.querySelectorAll(".sign-btn");
 signBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     operator = event.target.textContent;
+    // console.log(operator);
   });
 });
 
 const numBtns = document.querySelectorAll(".num-btn");
 numBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
+    // console.log(operator);
     if (operator != "") {
       secNum += event.target.textContent;
+    } else if (result) {
+      firstNum = event.target.textContent;
+      result = false;
     } else {
       firstNum += event.target.textContent;
     }
 
     display(firstNum, secNum, operator);
   });
+});
+
+const equalBtn = document.querySelector(".equal-btn");
+equalBtn.addEventListener("click", () => {
+  operate(firstNum, secNum);
 });
