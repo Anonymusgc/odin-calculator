@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Verdana, sans-serif;
+}
+
+.container {
+  background-color: #ddd;
+  width: 250px;
+  margin: auto;
+  padding: 1em;
+}
+.display {
+  background-color: white;
+  padding: 1em 0.5em;
+}
+.display-text {
+  text-align: right;
+  margin-right: 5px;
+}
+.keyboard {
+  margin-top: 1em;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.keyboard button {
+  padding: 0.5em 1em;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 14px;
+}
