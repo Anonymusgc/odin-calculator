@@ -50,8 +50,11 @@ const display = function (a, b, operator) {
 const signBtns = document.querySelectorAll(".sign-btn");
 signBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
+    if (secNum != "") {
+      operate(firstNum, secNum);
+    }
     operator = event.target.textContent;
-    // console.log(operator);
+    console.log(operator);
   });
 });
 

@@ -20,6 +20,7 @@ body {
 .display-text {
   text-align: right;
   margin-right: 5px;
+  height: 1em;
 }
 .keyboard {
   margin-top: 1em;
