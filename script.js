@@ -4,19 +4,19 @@ let operator = "";
 let result = false;
 
 const add = function (a, b) {
-  return "" + (a + b);
+  return "" + Math.round((a + b) * 1000) / 1000;
 };
 
 const subtract = function (a, b) {
-  return "" + (a - b);
+  return "" + Math.round((a - b) * 1000) / 1000;
 };
 
 const multiply = function (a, b) {
-  return "" + a * b;
+  return "" + Math.round(a * b * 1000) / 1000;
 };
 
 const divide = function (a, b) {
-  return "" + a / b;
+  return "" + Math.round((a / b) * 1000) / 1000;
 };
 
 const operate = function (a, b) {
@@ -31,7 +31,7 @@ const operate = function (a, b) {
   } else if (operator == "/") {
     firstNum = divide(a, b);
   }
-
+  console.log(firstNum);
   operator = "";
   secNum = "";
   display(firstNum, secNum, operator);
@@ -50,6 +50,16 @@ const display = function (a, b, operator) {
 const signBtns = document.querySelectorAll(".sign-btn");
 signBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
+    const sign = event.target.textContent;
+    if (firstNum == "" && sign == "-") {
+      firstNum = "-";
+      return;
+    } else if (firstNum == "-" && sign == "+") {
+      firstNum = "";
+      return;
+    } else if (firstNum == "") {
+      return;
+    }
     if (secNum != "") {
       operate(firstNum, secNum);
     }
