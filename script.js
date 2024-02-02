@@ -77,8 +77,15 @@ numBtns.forEach((btn) => {
 
 const equalBtn = document.querySelector(".equal-btn");
 equalBtn.addEventListener("click", () => {
-  operate(firstNum, secNum);
-  result = true;
+  if (firstNum == "") {
+    return;
+  } else if (operator != "" && secNum == "") {
+    operate(firstNum, firstNum);
+    result = true;
+  } else {
+    operate(firstNum, secNum);
+    result = true;
+  }
 });
 
 const clearBtn = document.querySelector(".clear-btn");
