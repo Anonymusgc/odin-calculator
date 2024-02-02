@@ -80,3 +80,12 @@ equalBtn.addEventListener("click", () => {
   operate(firstNum, secNum);
   result = true;
 });
+
+const clearBtn = document.querySelector(".clear-btn");
+clearBtn.addEventListener("click", () => {
+  firstNum = "";
+  secNum = "";
+  operator = "";
+  display(firstNum, secNum, operator);
+  result = false;
+});
