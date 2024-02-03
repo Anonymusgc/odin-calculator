@@ -89,9 +89,10 @@ numBtns.forEach((btn) => {
     if (operator != "") {
       secNum += event.target.textContent;
     } else if (result) {
-      console.log("wrong");
       firstNum = event.target.textContent;
       result = false;
+    } else if (firstNum == "0") {
+      firstNum = event.target.textContent;
     } else {
       firstNum += event.target.textContent;
     }
