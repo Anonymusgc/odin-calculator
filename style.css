@@ -58,19 +58,14 @@ body {
   height: 55px;
   text-align: center;
   font-size: 16px;
-}
-
-.equal-btn,
-.sign-btn,
-.clear-btn,
-.num-btn,
-.change-btn,
-.float-btn {
   border-radius: 5px;
   border: none;
   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
+}
+.keyboard .zero {
+  width: 135px;
 }
 
 .equal-btn,
@@ -83,16 +78,17 @@ body {
   background-color: #4eb4bb;
 }
 
-.num-btn,
-.clear-btn,
-.change-btn,
-.float-btn {
+.top-row-btn {
+  background-color: #059669;
+  color: var(--text-color);
+}
+.top-row-btn:active {
+  background-color: #6aaf9a;
+}
+.key-btn {
   background-color: var(--background-color2);
   color: var(--text-color);
 }
-.num-btn:active,
-.clear-btn:active,
-.change-btn:active,
-.float-btn:active {
+.key-btn:active {
   background-color: #5a616d;
 }
