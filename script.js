@@ -16,12 +16,17 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
+  console.log(a, b);
+  if (b == 0) {
+    return "Error";
+  }
   return "" + Math.round((a / b) * 1000) / 1000;
 };
 
 const operate = function (a, b) {
   a = Number(a);
   b = Number(b);
+
   if (operator == "+") {
     firstNum = add(a, b);
   } else if (operator == "-") {
@@ -30,16 +35,25 @@ const operate = function (a, b) {
     firstNum = multiply(a, b);
   } else if (operator == "/") {
     firstNum = divide(a, b);
+    if (firstNum == "Error") {
+      operator = "";
+      secNum = "";
+      display(firstNum, secNum, operator);
+      firstNum = "";
+      return false;
+    }
   }
   console.log(firstNum);
   operator = "";
   secNum = "";
   display(firstNum, secNum, operator);
+  return true;
 };
 
 const display = function (a, b, operator) {
   const displayText = document.querySelector(".display-text");
   // console.log(operator);
+
   if (operator != "") {
     displayText.textContent = b;
   } else {
@@ -75,12 +89,13 @@ numBtns.forEach((btn) => {
     if (operator != "") {
       secNum += event.target.textContent;
     } else if (result) {
+      console.log("wrong");
       firstNum = event.target.textContent;
       result = false;
     } else {
       firstNum += event.target.textContent;
     }
-
+    console.log(firstNum);
     display(firstNum, secNum, operator);
   });
 });
@@ -90,11 +105,9 @@ equalBtn.addEventListener("click", () => {
   if (firstNum == "") {
     return;
   } else if (operator != "" && secNum == "") {
-    operate(firstNum, firstNum);
-    result = true;
+    result = operate(firstNum, firstNum);
   } else {
-    operate(firstNum, secNum);
-    result = true;
+    result = operate(firstNum, secNum);
   }
 });
 
