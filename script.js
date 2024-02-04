@@ -88,14 +88,28 @@ numBtns.forEach((btn) => {
     // console.log(operator);
     const num = event.target.textContent;
     if (operator != "") {
-      secNum += num;
-    } else if (result) {
+      if (secNum.includes(".") && num == ".") {
+        return;
+      } else if (num == "." && (secNum == "" || secNum == "-")) {
+        secNum += "0.";
+      } else {
+        secNum += num;
+      }
+    } else if (result && num != ".") {
       firstNum = num;
       result = false;
-    } else if (firstNum == "0" || (firstNum == "-" && num == "0")) {
+    } else if (
+      (firstNum == "0" && num == "0") ||
+      (firstNum == "-" && num == "0")
+    ) {
       firstNum = num;
+    } else if (firstNum.includes(".") && num == ".") {
+      return;
+    } else if (num == "." && (firstNum == "" || firstNum == "-")) {
+      firstNum += "0.";
     } else {
       firstNum += num;
+      result = false;
     }
     console.log(firstNum);
     display(firstNum, secNum, operator);
