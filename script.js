@@ -61,24 +61,45 @@ const display = function (a, b, operator) {
   }
 };
 
+const equal = function () {
+  if (firstNum == "" || operator == "") {
+    return;
+  } else if (operator != "" && secNum == "") {
+    result = operate(firstNum, firstNum);
+  } else {
+    result = operate(firstNum, secNum);
+  }
+};
+
+const signAdd = function (sign) {
+  if (firstNum == "" && sign == "-") {
+    firstNum = "-";
+    return;
+  } else if (firstNum == "-" && sign == "+") {
+    firstNum = "";
+    return;
+  } else if (firstNum == "") {
+    return;
+  }
+  if (secNum != "") {
+    operate(firstNum, secNum);
+  }
+  operator = sign;
+  console.log(operator);
+};
+
+const clear = function () {
+  firstNum = "";
+  secNum = "";
+  operator = "";
+  display(firstNum, secNum, operator);
+  result = false;
+};
+
 const signBtns = document.querySelectorAll(".sign-btn");
 signBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
-    const sign = event.target.textContent;
-    if (firstNum == "" && sign == "-") {
-      firstNum = "-";
-      return;
-    } else if (firstNum == "-" && sign == "+") {
-      firstNum = "";
-      return;
-    } else if (firstNum == "") {
-      return;
-    }
-    if (secNum != "") {
-      operate(firstNum, secNum);
-    }
-    operator = event.target.textContent;
-    console.log(operator);
+    signAdd(event.target.textContent);
   });
 });
 
@@ -92,6 +113,8 @@ numBtns.forEach((btn) => {
         return;
       } else if (num == "." && (secNum == "" || secNum == "-")) {
         secNum += "0.";
+      } else if (secNum == "0" && num != ".") {
+        secNum = num;
       } else {
         secNum += num;
       }
@@ -99,7 +122,7 @@ numBtns.forEach((btn) => {
       firstNum = num;
       result = false;
     } else if (
-      (firstNum == "0" && num == "0") ||
+      (firstNum == "0" && num != ".") ||
       (firstNum == "-" && num == "0")
     ) {
       firstNum = num;
@@ -118,22 +141,12 @@ numBtns.forEach((btn) => {
 
 const equalBtn = document.querySelector(".equal-btn");
 equalBtn.addEventListener("click", () => {
-  if (firstNum == "" || operator == "") {
-    return;
-  } else if (operator != "" && secNum == "") {
-    result = operate(firstNum, firstNum);
-  } else {
-    result = operate(firstNum, secNum);
-  }
+  equal();
 });
 
 const clearBtn = document.querySelector(".clear-btn");
 clearBtn.addEventListener("click", () => {
-  firstNum = "";
-  secNum = "";
-  operator = "";
-  display(firstNum, secNum, operator);
-  result = false;
+  clear();
 });
 
 const signChangeBtn = document.querySelector(".change-btn");
@@ -152,4 +165,83 @@ signChangeBtn.addEventListener("click", () => {
     }
     display(firstNum, secNum, operator);
   }
+});
+
+const percentBtn = document.querySelector(".percent-btn");
+percentBtn.addEventListener("click", () => {
+  if (firstNum != "" || firstNum != "-") {
+    if (operator != "") {
+      secNum = secNum / 100;
+    } else {
+      firstNum = firstNum / 100;
+    }
+    display(firstNum, secNum, operator);
+  }
+});
+
+//keyboard support
+document.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  //enter and =
+  if (event.key == "Enter" || event.key == "=") {
+    event.preventDefault();
+    equal();
+  }
+  //backspace
+  if (event.key == "Backspace") {
+    event.preventDefault();
+    clear();
+  }
+
+  //signs
+  if (
+    event.key == "+" ||
+    event.key == "-" ||
+    event.key == "*" ||
+    event.key == "/"
+  ) {
+    event.preventDefault();
+    signAdd(event.key);
+  }
+
+  //numbers
+  for (let i = 0; i <= 9; i++) {
+    if (event.key == i) {
+      if (operator != "") {
+        if (firstNum == 0) {
+          secNum = event.key;
+        } else {
+          secNum += event.key;
+        }
+      } else {
+        if (firstNum == 0) {
+          firstNum = event.key;
+        } else {
+          firstNum += event.key;
+        }
+      }
+    }
+  }
+  // dot
+  if (event.key == ".") {
+    if (operator != "") {
+      if (secNum == "" || secNum == "-") {
+        secNum += "0.";
+      } else if (secNum.includes(".")) {
+        return;
+      } else {
+        secNum += event.key;
+      }
+    } else {
+      if (firstNum == "" || firstNum == "-") {
+        firstNum += "0.";
+      } else if (firstNum.includes(".")) {
+        return;
+      } else {
+        firstNum += event.key;
+      }
+    }
+  }
+
+  display(firstNum, secNum, operator);
 });

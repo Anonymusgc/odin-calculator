@@ -40,6 +40,9 @@ body {
   margin: auto;
   font-weight: bold;
   font-size: 32px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }
 .keyboard {
   margin-top: 0.5em;
