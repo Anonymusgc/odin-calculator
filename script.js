@@ -118,7 +118,7 @@ numBtns.forEach((btn) => {
 
 const equalBtn = document.querySelector(".equal-btn");
 equalBtn.addEventListener("click", () => {
-  if (firstNum == "") {
+  if (firstNum == "" || operator == "") {
     return;
   } else if (operator != "" && secNum == "") {
     result = operate(firstNum, firstNum);
