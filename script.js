@@ -135,3 +135,21 @@ clearBtn.addEventListener("click", () => {
   display(firstNum, secNum, operator);
   result = false;
 });
+
+const signChangeBtn = document.querySelector(".change-btn");
+signChangeBtn.addEventListener("click", () => {
+  if (firstNum != "") {
+    if (operator != "") {
+      secNum =
+        Number(secNum) <= 0
+          ? "" + Math.abs(Number(secNum))
+          : "-" + Number(secNum);
+    } else {
+      firstNum =
+        Number(firstNum) <= 0
+          ? "" + Math.abs(Number(firstNum))
+          : "-" + Number(firstNum);
+    }
+    display(firstNum, secNum, operator);
+  }
+});
