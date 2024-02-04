@@ -86,15 +86,16 @@ const numBtns = document.querySelectorAll(".num-btn");
 numBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     // console.log(operator);
+    const num = event.target.textContent;
     if (operator != "") {
-      secNum += event.target.textContent;
+      secNum += num;
     } else if (result) {
-      firstNum = event.target.textContent;
+      firstNum = num;
       result = false;
-    } else if (firstNum == "0") {
-      firstNum = event.target.textContent;
+    } else if (firstNum == "0" || (firstNum == "-" && num == "0")) {
+      firstNum = num;
     } else {
-      firstNum += event.target.textContent;
+      firstNum += num;
     }
     console.log(firstNum);
     display(firstNum, secNum, operator);
